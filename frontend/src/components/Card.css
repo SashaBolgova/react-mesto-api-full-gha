@@ -1,0 +1,103 @@
+.element {
+  margin: 0;
+  padding: 0;
+  max-width: 282px;
+  position: relative;
+}
+
+.element__button-delete {
+  display: block;
+  background-image: url(../images/basket.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  width: 18px;
+  height: 19px;
+  z-index: 2;
+  margin: 18px 15px 0 0 ;
+  position: absolute;
+  right: 0;
+}
+
+.element__button-delete:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+}
+
+.element__group {
+  object-fit: cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px 25px 21px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.element__image {
+  display: block;
+  width: 282px;
+  height: 282px;
+  box-sizing: border-box;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #ffffff;
+}
+
+.element__image:hover {
+  cursor: pointer;
+}
+
+.element__like {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.element__like-button {
+  background-image: url(../images/logo-like.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  width: 22px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.element__like-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+}
+
+.element__like-button_active {
+  background-image: url(../images/logo-like-active.svg);
+}
+
+.element__like-counter {
+  width: 10px;
+  height: 13px;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+  text-align: center;
+  color: #000000;
+  margin: 3px 0 0;
+}
+
+.element__text {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

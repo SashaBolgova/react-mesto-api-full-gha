@@ -1,0 +1,17 @@
+.element__button-delete {
+  display: block;
+  background-image: url(../../../images/basket.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  width: 18px;
+  height: 19px;
+  transform: translate(244px, 39px);
+  z-index: 2;
+}
+
+.element__button-delete:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+}
