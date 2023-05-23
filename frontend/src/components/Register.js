@@ -2,26 +2,43 @@ import { useState } from 'react';
 import './Register.css'
 
 const Register = ({ onRegister }) => {
+    const [message, setMessage] = useState('');
     const [formValue, setFormValue] = useState({
         email: '',
         password: ''
     })
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChangeEmail = (e) => {
+        const email = e.target.value;
 
         setFormValue({
             ...formValue,
-            [name]: value
+            email,
         });
     }
+
+    function handleChangePassword(e) {
+        const password = e.target.value;
+
+        setFormValue({
+            ...formValue,
+            password,
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-       
-        const { email, password } = formValue;
-        if (onRegister && email && password) {
-            onRegister(email, password);
+
+        if (!formValue.email || !formValue.password) {
+            return setMessage('Неверные данные')
         }
+        onRegister(formValue);
+
+        setFormValue({
+            email: "",
+            password: ""
+        })
+
     }
     return (
         <div className='registration'>
@@ -35,7 +52,7 @@ const Register = ({ onRegister }) => {
                     required
                     value={formValue.email}
                     placeholder='Email'
-                    onChange={handleChange}
+                    onChange={handleChangeEmail}
                 />
                 <input
                     className='registration__input'
@@ -45,7 +62,7 @@ const Register = ({ onRegister }) => {
                     required
                     value={formValue.password}
                     placeholder='Пароль'
-                    onChange={handleChange}
+                    onChange={handleChangePassword}
                 />
                 <button type="submit" className='registration__button'>Зарегистрироваться</button>
                 <p className='registration__text'>Уже зарегистрированы?

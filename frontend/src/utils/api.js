@@ -10,7 +10,7 @@ class Api {
   }
   _checkAnswer(res) {
     if (res.ok) {
-      return (res.json());
+      return res.json();
     } else {
       return res.json()
         .then((err) => {
@@ -25,6 +25,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       headers: this._headers,
     })
       .then(res => this._checkAnswer(res));
@@ -32,6 +33,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       headers: this._headers,
     })
       .then(res => this._checkAnswer(res));
@@ -39,6 +41,7 @@ class Api {
 
   changeUserInfo({ name, profession }) {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -51,6 +54,7 @@ class Api {
 
   addMyCard({ place, image }) {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -63,6 +67,7 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     })
@@ -71,6 +76,7 @@ class Api {
 
   addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      credentials: 'include',
       method: 'PUT',
       headers: this._headers,
     })
@@ -79,6 +85,7 @@ class Api {
 
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     })
@@ -95,6 +102,7 @@ class Api {
 
   changeAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -108,6 +116,7 @@ class Api {
 
 export const api = new Api({
   baseUrl: 'https://api.sashaproject.nomoredomains.monster',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
   }

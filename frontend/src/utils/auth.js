@@ -13,9 +13,9 @@ const checkAnswer = (res) => {
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
+    credentials: 'include',
     method: 'POST',
     headers: {
-      'Accept': "application/json",
       'Content-Type': 'application/json'
     },
     body: JSON.stringify( { email, password } ),
@@ -25,9 +25,9 @@ export const register = (email, password) => {
 
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
+    credentials: 'include',
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ email, password }),
@@ -37,10 +37,11 @@ export const authorize = (email, password) => {
 
 export const cookiesCheck = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
+    credentials: 'include',
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      //'Authorization': `Bearer ${token}`,
     },
   })
     .then(checkAnswer)
