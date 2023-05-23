@@ -23,7 +23,29 @@ const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
 const { PORT = 3000, LOCALHOST = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
-app.use(cors());
+const allowedCors = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'https://localhost:3000',
+  'https://localhost:3001',
+  'https://sashaproject.nomoredomains.monster',
+  'http://sashaproject.nomoredomains.monster',
+  'https://api.sashaproject.nomoredomains.monster',
+  'http://api.sashaproject.nomoredomains.monster',
+  'https://www.api.sashaproject.nomoredomains.monster',
+  'http://www.api.sashaproject.nomoredomains.monster',
+];
+
+const corsOptions = {
+  origin: allowedCors,
+  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
