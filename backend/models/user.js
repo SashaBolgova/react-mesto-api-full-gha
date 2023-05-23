@@ -33,9 +33,9 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Поле email  должно быть заполнено'],
       unique: true,
       validate: {
-        validator: (email) => validator.isEmail(email),
-        message: 'Почта некорректна',
-      },
+        validator(v) {
+          return validator.isEmail(v);
+        },
     },
     password: {
       type: String,
@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
   },
-  { toJSON: { useProjection: true }, toObject: { useProjection: true } },
+
+  { versionKey: false },
 );
 
 userSchema.statics.findUserByCredentials = function (email, password) {

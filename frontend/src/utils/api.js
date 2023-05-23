@@ -23,7 +23,6 @@ class Api {
     this._headers.Authorization = `Bearer ${token}`;
   }
 
-
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
@@ -116,7 +115,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://api.sashaproject.nomoredomains.monster/',
+  baseUrl: 'https://api.sashaproject.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
   }

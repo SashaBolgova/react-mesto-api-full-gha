@@ -22,11 +22,7 @@ function App() {
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [cards, setCards] = useState([]);
-    const [currentUser, setCurrentUser] = useState({
-        name: '',
-        about: '',
-        avatar: '',
-    });
+    const [currentUser, setCurrentUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
     const [isSuccess, setSuccess] = useState(false);
     const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
@@ -166,7 +162,7 @@ function App() {
             })
     }
 
-    function handleLogin({ email, password }) {
+    function handleLogin( { email, password } ) {
         auth.authorize(email, password)
             .then((data) => {
                 localStorage.setItem("jwt", data.token);

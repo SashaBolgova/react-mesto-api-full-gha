@@ -15,10 +15,10 @@ export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
+      'Accept': "application/json",
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email, password }),
-    credentials: 'include',
+    body: JSON.stringify( { email, password } ),
   })
     .then(checkAnswer)
 }
@@ -31,7 +31,6 @@ export const authorize = (email, password) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ email, password }),
-    credentials: 'include',
   })
     .then(checkAnswer)
 }
@@ -41,9 +40,8 @@ export const cookiesCheck = (token) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
     },
-    credentials: 'include',
   })
     .then(checkAnswer)
 }
