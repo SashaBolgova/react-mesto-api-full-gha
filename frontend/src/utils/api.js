@@ -3,6 +3,10 @@ class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
+
+    const token = localStorage.getItem("jwt")
+    if (token)
+      this.setAuthToken(token);
   }
   _checkAnswer(res) {
     if (res.ok) {
@@ -14,6 +18,11 @@ class Api {
         })
     }
   }
+
+  setAuthToken (token) {
+    this._headers.Authorization = `Bearer ${token}`;
+  }
+
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -72,7 +81,7 @@ class Api {
       headers: this._headers,
       credentials: 'include',
     })
-    .then(res => this._checkAnswer(res));
+      .then(res => this._checkAnswer(res));
   }
 
   deleteLike(cardId) {
@@ -81,7 +90,7 @@ class Api {
       headers: this._headers,
       credentials: 'include',
     })
-    .then(res => this._checkAnswer(res));
+      .then(res => this._checkAnswer(res));
   }
 
   changeLikeCardStatus(cardId, isLiked) {
@@ -107,7 +116,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://sashaproject.nomoredomains.monster/',
+  baseUrl: 'https://api.sashaproject.nomoredomains.monster/',
   headers: {
     'Content-Type': 'application/json',
   }

@@ -151,7 +151,7 @@ function App() {
             })
     }
 
-    function handleRegister(email, password) {
+    function handleRegister({ email, password }) {
         auth.register(email, password)
             .then((res) => {
                 if (res) {
@@ -166,7 +166,7 @@ function App() {
             })
     }
 
-    function handleLogin(email, password) {
+    function handleLogin({ email, password }) {
         auth.authorize(email, password)
             .then((data) => {
                 localStorage.setItem("jwt", data.token);

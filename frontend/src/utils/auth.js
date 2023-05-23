@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://sashaproject.nomoredomains.monster';
+export const BASE_URL = 'https://api.sashaproject.nomoredomains.monster';
 
 const checkAnswer = (res) => {
   if (res.ok) {
@@ -11,7 +11,7 @@ const checkAnswer = (res) => {
   }
 }
 
-export const register = ({ email, password }) => {
+export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -23,7 +23,7 @@ export const register = ({ email, password }) => {
     .then(checkAnswer)
 }
 
-export const authorize = ({ email, password }) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -36,22 +36,12 @@ export const authorize = ({ email, password }) => {
     .then(checkAnswer)
 }
 
-export const logout = () => {
-  return fetch(`${BASE_URL}/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-  })
-    .then(checkAnswer)
-};
-
-export const cookiesCheck = () => {
-  return fetch(`${BASE_URL}/check`, {
+export const cookiesCheck = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     credentials: 'include',
   })
