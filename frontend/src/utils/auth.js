@@ -18,7 +18,7 @@ export const register = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify( { email, password } ),
+    body: JSON.stringify({ email, password }),
   })
     .then(checkAnswer)
 }
@@ -31,6 +31,17 @@ export const authorize = (email, password) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ email, password }),
+  })
+    .then(checkAnswer)
+}
+
+export const signOut = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    credentials: 'include',
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
     .then(checkAnswer)
 }

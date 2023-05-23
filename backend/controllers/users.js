@@ -56,12 +56,7 @@ module.exports.createUser = (req, res, next) => {
       User.create({
         name, about, avatar, email, password: hash,
       })
-        .then((user) => res.status(201).send({
-          name: user.name,
-          about: user.about,
-          avatar: user.avatar,
-          email: user.email,
-        }))
+        .then((user) => res.status(201).send({ data: user }))
         .catch((err) => {
           if (err.name === 'ValidationError') {
             next(new BadRequestError('Переданы некорректные данные'));
@@ -84,9 +79,25 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.send({ token });
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      });
+      res.send({ message: 'Вы успешно авторизовались' });
     })
     .catch(next);
+};
+
+module.exports.signOut = (req, res) => {
+  res.cookie('jwt', 'none', {
+    maxAge: 3000,
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
+  });
+  res.send({ message: '' });
 };
 
 function updateInfo(req, res, next, data) {

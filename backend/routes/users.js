@@ -5,7 +5,7 @@ const userRouter = express.Router();
 const { errors } = require('celebrate');
 
 const {
-  getUsers, getUser, updateUser, updateAvatar, getUserInfo,
+  getUsers, getUser, updateUser, updateAvatar, getUserInfo, signOut,
 } = require('../controllers/users');
 
 const {
@@ -21,6 +21,8 @@ userRouter.get('/:userId', validateUserId, getUser);
 userRouter.patch('/me', validateUserUpdate, updateUser);
 
 userRouter.patch('/me/avatar', validateAvatarUpdate, updateAvatar);
+
+userRouter.delete('/me', signOut);
 
 userRouter.use(errors());
 

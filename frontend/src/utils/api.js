@@ -3,11 +3,8 @@ class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-
-    const token = localStorage.getItem("jwt")
-    if (token)
-      this.setAuthToken(token);
   }
+  
   _checkAnswer(res) {
     if (res.ok) {
       return res.json();
@@ -17,10 +14,6 @@ class Api {
           throw new Error(err.message);
         })
     }
-  }
-
-  setAuthToken (token) {
-    this._headers.Authorization = `Bearer ${token}`;
   }
 
   getUserInfo() {

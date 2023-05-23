@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -30,31 +30,37 @@ function App() {
     const navigate = useNavigate();
 
     const checkToken = () => {
-        const jwt = localStorage.getItem('jwt')
-        if (jwt) {
-            auth.cookiesCheck(jwt)
-                .then((res) => {
-                    if (res) {
-                        setLoggedIn(true); 
-                        setUserEmail(res.email);
-                        navigate("/", { replace: true });
-                    }
-                })
-                .catch((err) => {
-                    console.log('Неверный токен.', err);
-                })
-        }
+        auth.cookiesCheck()
+            .then((res) => {
+                if (res) {
+                    setLoggedIn(true);
+                    setUserEmail(res.email);
+                    navigate("/", { replace: true });
+                }
+            })
+            .catch((err) => {
+                console.log('Неверный токен.', err);
+            })
     };
 
     useEffect(() => {
         checkToken();
     }, []);
 
-    function signOut() {
-        localStorage.removeItem('jwt'); 
-        setLoggedIn(false); 
-        navigate('/sign-in');
-      };
+    const signOut = useCallback(async () => {
+        try {
+          const data = await auth.signOut();
+          if (data) {
+            setLoggedIn(false);
+            setUserEmail('');
+            navigate("/sign-in", { replace: true });
+            setCards([])
+            setCurrentUser({})
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }, [navigate]);
 
     useEffect(() => {
         if (loggedIn) {
@@ -147,36 +153,41 @@ function App() {
             })
     }
 
-    function handleRegister({ email, password }) {
-        auth.register(email, password)
-            .then((res) => {
-                if (res) {
+    const handleRegister = useCallback(
+        async (password, email) => {
+            try {
+                const data = await auth.register(password, email);
+                if (data) {
+                    setUserEmail(data.email);
                     setSuccess(true);
-                    navigate('/sign-in', { replace: true })
+                    navigate('/sign-in', { replace: true });
                 }
-            })
-            .catch((err) => {
+            } catch (err) {
                 setSuccess(false);
                 setInfoTooltipPopupOpen(true);
                 console.log(err);
-            })
-    }
+            }
+        },
+        [navigate]
+    );
 
-    function handleLogin( { email, password } ) {
-        auth.authorize(email, password)
-            .then((data) => {
-                localStorage.setItem("jwt", data.token);
-                api.setAuthToken(data.token);
-                setLoggedIn(true)
-                setUserEmail(email);
-                navigate('/', { replace: true })
-            }).catch((err) => {
+    const handleLogin = useCallback(
+        async (password, email) => {
+            try {
+                const data = await auth.authorize(password, email);
+                if (data) {
+                    setLoggedIn(true);
+                    setUserEmail(email);
+                    navigate("/", { replace: true });
+                }
+            } catch (err) {
                 setSuccess(false);
                 setInfoTooltipPopupOpen(true);
                 console.log(err);
-            })
-    }
-
+            }
+        },
+        [navigate]
+    );
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="App">
