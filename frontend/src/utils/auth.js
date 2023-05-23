@@ -11,7 +11,7 @@ const checkAnswer = (res) => {
   }
 }
 
-export const register = (email, password) => {
+export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     credentials: 'include',
     method: 'POST',
@@ -23,7 +23,7 @@ export const register = (email, password) => {
     .then(checkAnswer)
 }
 
-export const authorize = (email, password) => {
+export const authorize = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     credentials: 'include',
     method: 'POST',
