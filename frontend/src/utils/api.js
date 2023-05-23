@@ -26,7 +26,6 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -34,7 +33,6 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -47,7 +45,6 @@ class Api {
         name: name,
         about: profession
       }),
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -60,7 +57,6 @@ class Api {
         name: place,
         link: image
       }),
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -69,7 +65,6 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -78,7 +73,6 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers,
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -87,7 +81,6 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers,
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
@@ -107,7 +100,6 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar
       }),
-      credentials: 'include',
     })
       .then(res => this._checkAnswer(res));
   }
