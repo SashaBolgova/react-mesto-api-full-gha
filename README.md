@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.33.14
+IP-адрес 158.160.49.39
 
 Frontend https://sashaproject.nomoredomains.monster/
 
