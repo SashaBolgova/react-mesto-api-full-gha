@@ -22,7 +22,11 @@ function App() {
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [cards, setCards] = useState([]);
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState({
+        name: '',
+        about: '',
+        avatar: '',
+    });
     const [loggedIn, setLoggedIn] = useState(false);
     const [isSuccess, setSuccess] = useState(false);
     const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
@@ -131,10 +135,10 @@ function App() {
             })
     }
 
-    function handleUpdateAvatar(data) {
-        api.changeAvatar(data)
-            .then(res => {
-                setCurrentUser(res);
+    function handleUpdateAvatar(userData) {
+        api.changeAvatar(userData)
+            .then(data => {
+                setCurrentUser(data);
                 setEditAvatarPopupOpen(false);
             })
             .catch((err) => {
