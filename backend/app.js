@@ -23,6 +23,8 @@ const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
 
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+
 app.use(cors(
   {
     origin: ['http://localhost:3000',
@@ -46,10 +48,6 @@ app.use(cors(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-
-mongoose.connect('mongodb://localhost:27017/mestodb')
-  .then(() => console.log('Успешное подключение к MongoDB'))
-  .catch((error) => console.error('Ошибка подключения:', error));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
