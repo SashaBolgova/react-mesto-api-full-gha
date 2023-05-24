@@ -8,12 +8,8 @@ class Api {
   _checkAnswer(res) {
     if (res.ok) {
       return res.json();
-    } else {
-      return res.json()
-        .then((err) => {
-          throw new Error(err.message);
-        })
     }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getUserInfo() {
@@ -34,14 +30,14 @@ class Api {
       .then(res => this._checkAnswer(res));
   }
 
-  changeUserInfo({ name, profession }) {
+  changeUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: profession
+        name: data.name,
+        about: data.profession
       }),
     })
       .then(res => this._checkAnswer(res));
