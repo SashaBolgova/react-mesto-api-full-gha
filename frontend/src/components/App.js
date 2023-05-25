@@ -72,6 +72,7 @@ function App() {
         Promise.all([api.getUserInfo(), api.getInitialCards()])
             .then(([userData, cards]) => {
                 setCurrentUser(userData);
+                setUserEmail(userData.email);
                 setCards(cards);
             })
             .catch((err) => {
@@ -164,6 +165,7 @@ function App() {
                 if (data) {
                     setUserEmail(data.email);
                     setSuccess(true);
+                    setInfoTooltipPopupOpen(true);
                     navigate('/sign-in', { replace: true });
                 }
             } catch (err) {
@@ -181,8 +183,8 @@ function App() {
                 const data = await auth.authorize(password, email);
                 if (data) {
                     setLoggedIn(true);
-                    setUserEmail(email);
                     navigate("/", { replace: true });
+                    setUserEmail(email);
                 }
             } catch (err) {
                 setSuccess(false);

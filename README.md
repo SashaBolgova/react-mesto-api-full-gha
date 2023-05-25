@@ -9,7 +9,9 @@
 ## Ссылки на проект
 
 IP-адрес 158.160.49.39
+//Наставник сказал, что редирект отключать не нужно. Но если необходимо, то я удалю SSL-сертификатю
 
 Frontend https://sashaproject.nomoredomains.monster/
 
 Backend https://api.sashaproject.nomoredomains.monster/
+

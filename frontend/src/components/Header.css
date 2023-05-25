@@ -58,13 +58,8 @@
   box-sizing: border-box;
 }
 
-.header__wrapper_visible {
-  display: none;
-}
-
 .header__email {
   margin: 0 24px 0 0;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

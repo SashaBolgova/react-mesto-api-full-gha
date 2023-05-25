@@ -21,9 +21,11 @@ const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/not-found-err');
 
 // Слушаем 3000 порт
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, LOCALHOST = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+mongoose.connect(LOCALHOST, {
+  useNewUrlParser: true,
+});
 
 app.use(cors(
   {
